@@ -1,1 +1,1 @@
-# stryd_tech_test
+# Technical Task for Stryd
