@@ -6,20 +6,29 @@ import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
 
-def calculate_r2_mae_rmse(actual: list, predicted: list) -> str:
+def calculate_r2_mae_rmse(actual: list, predicted: list, number_features: int) -> str:
     """
-    Return the R2, MAE, and RMSE for a model.
+    Return the R2, adjusted R2, MAE, and RMSE for a model.
 
     Args:
         actual (list): Actual target values.
         predicted (list): Predicted target values.
+        number_features (int): Number of features in model.
     """
 
     r2 = r2_score(actual, predicted)
+
+    number_of_observations = len(actual)
+    adjusted_r2 = 1 - (
+        (1 - r2)
+        * (number_of_observations - 1)
+        / (number_of_observations - number_features - 1)
+    )
+
     mae = mean_absolute_error(actual, predicted)
     rmse = mean_squared_error(actual, predicted, squared=False)
 
-    metrics = f"R2: {r2:.4f}\nMAE: {mae:,.0f}\nRMSE: {rmse:,.0f}"
+    metrics = f"R2: {r2:.4f}\nAdjusted R2: {adjusted_r2:.4f}\nMAE: {mae:,.0f}\nRMSE: {rmse:,.0f}"
     return metrics
 
 
