@@ -39,12 +39,12 @@ def plot_residuals_qqplot_fit(actual: list, predicted: list):
     axs[0].axhline(y=0.0, color="r")
     axs[0].set_title("Model Residuals", fontweight="bold", fontsize=16)
     axs[0].set_xlabel("Predicted Values", weight="bold")
-    axs[0].set_ylabel("Residuals", weight="bold")
+    axs[0].set_ylabel("Residuals (Observed - Predicted)", weight="bold")
 
     sm.qqplot(residuals, line="q", ax=axs[1])
     axs[1].set_title("Q-Q Plot", fontweight="bold", fontsize=16)
     axs[1].set_xlabel("Theoretical Quantiles", weight="bold")
-    axs[1].set_ylabel("Ordered Values", weight="bold")
+    axs[1].set_ylabel("Sample Quantiles", weight="bold")
 
     axs[2].scatter(x=actual, y=predicted, alpha=0.2, label=None)
     p1 = max(max(actual), max(predicted))
